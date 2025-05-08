@@ -5,18 +5,20 @@ By standardizing the API design, input/output expectations, and behavior, this r
 
 # Endpoints
 ## Simple list of all endpoints
-| method | endpoint                              | headers | payload                       | params        | response                           | short description(<=7 words)         |
-| ------ | ------------------------------------- | ------- | ----------------------------- | ------------- | ---------------------------------- | ------------------------------------ |
-| POST   | `/register`                           | -       | username, password            | -             | OK                                 | register account for authentication  |
-| POST   | `/login`                              | -       | username, password            | -             | JWT                                | login to get JWT token               |
-| GET    | `/todolists`                          | JWT     | -                             | limit, offset | status, message, data: todolist    | get all todolist                     |
-| POST   | `/todolists/:todolistId`              | JWT     | todolistTitle, todolistStatus | -             | status, message, data: NULL        | add todolist to user with: todolist  |
-| PUT    | `/todolists/:todolistId`              | JWT     | todolistTitle, todolistStatus | -             | status, message, data: NULL        | update todolist title with: todolist |
-| DELETE | `/todolists/:todolistId`              | JWT     | -                             | -             | status, message, data: NULL        | delete todolist with: todolist       |
-| GET    | `/todolists/:todolistId`              | JWT     | -                             | limit, offset | status, message, data: todo        | get all todo                         |
-| POST   | `/todolists/:todolistId/todo`         | JWT     | todoMessage                   | -             | status, message, data: NULL        | add todo to todolist                 |
-| PUT    | `/todolists/:todolistId/todo/:todoId` | JWT     | todoStatus, todoMessage       | -             | status, message, data: todo.status | update todo                          |
-| DELETE | `/todolists/:todolistId/todo/:todoId` | JWT     | -                             | -             | status, message, data: NULL        | delete the todo from todolist        |
+
+| Method | Endpoint                           | Auth | Payload                  | Response Example                   | Description                  |
+| ------ | ---------------------------------- | ---- | ------------------------ | ---------------------------------- | ---------------------------- |
+| POST   | `/register`                        | -    | `{ username, password }` | OK                                 | Register a new user          |
+| POST   | `/login`                           | -    | `{ username, password }` | JWT                                | Login and receive JWT        |
+| GET    | `/todolists`                       | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists        |
+| POST   | `/todolists`                       | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list      |
+| GET    | `/todolists/:listId`               | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
+| PUT    | `/todolists/:listId`               | JWT  | `{ title, status}`       | status, message, data: NULL        | Update the title of a list   |
+| DELETE | `/todolists/:listId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
+| POST   | `/todolists/:listId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
+| PUT    | `/todolists/:listId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
+| DELETE | `/todolists/:listId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
+
 
 ## Status format
 the status format is drived from http status with added information.
