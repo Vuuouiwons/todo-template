@@ -13,7 +13,7 @@ By standardizing the API design, input/output expectations, and behavior, this r
 | GET    | `/todolists`                       | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists        |
 | POST   | `/todolists`                       | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list      |
 | GET    | `/todolists/:listId`               | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
-| PUT    | `/todolists/:listId`               | JWT  | `{ title, status}`       | status, message, data: NULL        | Update the title of a list   |
+| PUT    | `/todolists/:listId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list   |
 | DELETE | `/todolists/:listId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
 | POST   | `/todolists/:listId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
 | PUT    | `/todolists/:listId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
