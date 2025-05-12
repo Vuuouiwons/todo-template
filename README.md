@@ -3,6 +3,17 @@ This repository provides a structured specification for a ToDo list backend, inc
 
 By standardizing the API design, input/output expectations, and behavior, this repo enables consistent comparisons and learning experiences across different technologies.
 
+# Tech stack
+Describe the tech stack used to make this todo app.
+1. nothing
+2. nothing
+3. ...
+
+# Data flow
+```text
+app -> routes -> middlewares -> controllers -> services -> repository -> database -> models
+```
+
 # Endpoints
 ## Simple list of all endpoints
 
