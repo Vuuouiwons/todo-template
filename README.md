@@ -9,6 +9,11 @@ Describe the tech stack used to make this todo app.
 2. nothing
 3. ...
 
+## etc Tech stack
+Supporting microservices
+1. postgresql
+2. redis
+
 # Data flow
 ```text
 app -> routes -> middlewares -> controllers -> services -> repository -> database -> models
