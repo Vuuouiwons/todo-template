@@ -58,6 +58,14 @@ add new account to database.
 | username | username of user, unique, only contains lowercase a-z                   |
 | password | password of the user, password is stored in database with sha512 hasing |
 
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 201       | nodeId-RE-201 | success, user created                            |
+| 422       | nodeId-RE-422 | request body invalid                             |
+| 400       | nodeId-RE-400 | username not available                           |
+| 500       | nodeId-RE-500 | internal server error, new unknown error occured |
+
 ### POST  : `/login`
 login to the account, and retrives a json web token (JWT).
 
@@ -73,6 +81,13 @@ login to the account, and retrives a json web token (JWT).
 | status  | self explainatory            |
 | message | self explainatory            |
 | data    | JSON with keys: jwt (string) |
+
+#### Status
+| HTTP Code | Code          | Description            |
+| --------- | ------------- | ---------------------- |
+| 201       | nodeId-LO-201 | success, token created |
+| 422       | nodeId-LO-422 | request body invalid   |
+| 401       | nodeId-LO-401 | user unauthenticated   |
 
 ### GET   : `/todolists`
 get all todolists for the user. **Note: User credential is taken from jwt**.
@@ -95,6 +110,11 @@ get all todolists for the user. **Note: User credential is taken from jwt**.
 | message | self explainatory                                 |
 | data    | JSON with keys: todolists [title, status] (array) |
 
+| HTTP Code | Code          | Description           |
+| --------- | ------------- | --------------------- |
+| 200       | nodeId-TL-200 | success               |
+| 500       | nodeId-LO-500 | unknown error occured |
+
 ### POST  : `/todolists/:todolistId`
 add a todo to todolist to todolistId.
 
@@ -114,6 +134,13 @@ add a todo to todolist to todolistId.
 | status  | self explainatory |
 | message | self explainatory |
 | data    | NULL              |
+
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 201       | nodeId-TL-201 | success, todolist created                        |
+| 422       | nodeId-TL-422 | request body invalid                             |
+| 500       | nodeId-TL-500 | internal server error, new unknown error occured |
 
 ### PUT   : `/todolists/:todolistId`
 update the todolist property in this case title.
@@ -136,6 +163,14 @@ update the todolist property in this case title.
 | message | self explainatory |
 | data    | NULL              |
 
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 201       | nodeId-TL-201 | success, todolist updated                        |
+| 422       | nodeId-TL-422 | request body invalid                             |
+| 400       | nodeId-TL-400 | todolist doesn't exist                           |
+| 500       | nodeId-TL-500 | internal server error, new unknown error occured |
+
 ### DELETE: `/todolists/:todolistId`
 delete the todolist from the user.
 
@@ -150,6 +185,13 @@ delete the todolist from the user.
 | status  | self explainatory |
 | message | self explainatory |
 | data    | NULL              |
+
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 204       | nodeId-TL-204 | deleted                                          |
+| 400       | nodeId-TL-400 | delete failed                                    |
+| 500       | nodeId-TL-500 | internal server error, new unknown error occured |
 
 ### GET   : `/todolists/:todolistId`
 get all the todo from todolistId.
@@ -172,6 +214,13 @@ get all the todo from todolistId.
 | message | self explainatory                             |
 | data    | JSON with keys: todo[status, message] (array) |
 
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 200       | nodeId-TO-200 | success                                          |
+| 400       | nodeId-TO-400 | todolist doesn't exist                           |
+| 500       | nodeId-TO-500 | internal server error, new unknown error occured |
+
 ### POST  : `/todolists/:todolistId/todo`
 add todo to todolist
 
@@ -191,6 +240,14 @@ add todo to todolist
 | status  | self explainatory |
 | message | self explainatory |
 | data    | NULL              |
+
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 201       | nodeId-TO-201 | success, todo added                              |
+| 422       | nodeId-TO-422 | request body invalid                             |
+| 400       | nodeId-TO-400 | todolist doesn't exist                           |
+| 500       | nodeId-TO-500 | internal server error, new unknown error occured |
 
 ### PUT   : `/todolists/:todolistId/todo/:todoId`
 update the todo status (completed, incomplete), and todo message.
@@ -213,6 +270,14 @@ update the todo status (completed, incomplete), and todo message.
 | message | self explainatory |
 | data    | NULL              |
 
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 201       | nodeId-TO-201 | success, todo updated                            |
+| 422       | nodeId-TO-422 | request body invalid                             |
+| 400       | nodeId-TO-400 | todolist or todo doesn't exist                   |
+| 500       | nodeId-TO-500 | internal server error, new unknown error occured |
+
 ### DELETE: `/todolists/:todolistId/todo/:todoId`
 delete the todo from todolist
 
@@ -227,3 +292,10 @@ delete the todo from todolist
 | status  | self explainatory |
 | message | self explainatory |
 | data    | NULL              |
+
+#### Status
+| HTTP Code | Code          | Description                                      |
+| --------- | ------------- | ------------------------------------------------ |
+| 204       | nodeId-TO-204 | success, todo deleted                            |
+| 400       | nodeId-TO-400 | todolist or todo doesn't exist                   |
+| 500       | nodeId-TO-500 | internal server error, new unknown error occured |
