@@ -1,2 +1,2 @@
 # Utils
-application utils, repeated function, utility call, etc. 
+Small, standalone helper functions. Single-purpose and highly reusable.
