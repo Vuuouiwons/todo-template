@@ -1,0 +1,2 @@
+# Routes
+all application routes
