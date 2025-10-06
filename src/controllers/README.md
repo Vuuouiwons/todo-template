@@ -1,2 +1,2 @@
 # Controller
-call services and gives appropriate error code based on the services returns
+Manages http lifecycle, do not put any buisness logic here
