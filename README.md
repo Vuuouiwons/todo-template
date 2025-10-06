@@ -38,12 +38,12 @@ app -> global middlewares-> routes -> local middlewares -> controllers -> servic
 | POST   | `/auth/login`                      | -    | `{ username, password }` | JWT                                | Login and receive JWT        |
 | GET    | `/todolists`                       | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists        |
 | POST   | `/todolists`                       | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list      |
-| PUT    | `/todolists/:listId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list   |
-| DELETE | `/todolists/:listId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
-| GET    | `/todolists/:listId/todos`         | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
-| POST   | `/todolists/:listId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
-| PUT    | `/todolists/:listId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
-| DELETE | `/todolists/:listId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
+| PUT    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list   |
+| DELETE | `/todolists/:todolistId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
+| GET    | `/todolists/:todolistId/todos`         | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
+| POST   | `/todolists/:todolistId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
+| PUT    | `/todolists/:todolistId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
+| DELETE | `/todolists/:todolistId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
 
 ## Detailed description of the endpoint and its functions
 endpoint description contains a header, payload, and reponse table for that endpoint.
