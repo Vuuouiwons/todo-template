@@ -28,9 +28,9 @@ app -> routes -> middlewares -> controllers -> services -> repository -> databas
 | POST   | `/login`                           | -    | `{ username, password }` | JWT                                | Login and receive JWT        |
 | GET    | `/todolists`                       | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists        |
 | POST   | `/todolists`                       | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list      |
-| GET    | `/todolists/:listId`               | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
 | PUT    | `/todolists/:listId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list   |
 | DELETE | `/todolists/:listId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
+| GET    | `/todolists/:listId/todos`         | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
 | POST   | `/todolists/:listId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
 | PUT    | `/todolists/:listId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
 | DELETE | `/todolists/:listId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
@@ -193,7 +193,7 @@ delete the todolist from the user.
 | 400       | nodeId-TL-400 | delete failed                                    |
 | 500       | nodeId-TL-500 | internal server error, new unknown error occured |
 
-### GET   : `/todolists/:todolistId`
+### GET   : `/todolists/:todolistId/todos`
 get all the todo from todolistId.
 
 #### Header
