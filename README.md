@@ -5,18 +5,20 @@ By standardizing the API design, input/output expectations, and behavior, this r
 
 # Tech stack
 Describe the tech stack used to make this todo app.
-1. nothing
-2. nothing
-3. ...
+1. Backend Framework
+2. ORM
+3. Logging
+4. Parameter Checker
 
 ## etc Tech stack
 Supporting microservices
-1. postgresql
-2. redis
+1. Database
+2. Cache
 
 # Data flow
+Data flow follows SOLID code principle
 ```text
-app -> routes -> middlewares -> controllers -> services -> repository -> database -> models
+app -> global middlewares-> routes -> local middlewares -> controllers -> services -> repository -> database -> models
 ```
 
 # Endpoints
@@ -34,14 +36,6 @@ app -> routes -> middlewares -> controllers -> services -> repository -> databas
 | POST   | `/todolists/:listId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
 | PUT    | `/todolists/:listId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
 | DELETE | `/todolists/:listId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
-
-
-## Status format
-the status format is drived from http status with added information.
-```
-node-controller-httpCode
-x-xx-xxx
-```
 
 ## Detailed description of the endpoint and its functions
 endpoint description contains a header, payload, and reponse table for that endpoint.
