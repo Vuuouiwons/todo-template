@@ -32,18 +32,20 @@ app -> global middlewares-> routes -> local middlewares -> controllers -> servic
 # Endpoints
 ## Simple list of all endpoints
 
-| Method | Endpoint                           | Auth | Payload                  | Response Example                   | Description                  |
-| ------ | ---------------------------------- | ---- | ------------------------ | ---------------------------------- | ---------------------------- |
-| POST   | `/auth/register`                   | -    | `{ username, password }` | OK                                 | Register a new user          |
-| POST   | `/auth/login`                      | -    | `{ username, password }` | JWT                                | Login and receive JWT        |
-| GET    | `/todolists`                       | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists        |
-| POST   | `/todolists`                       | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list      |
-| PUT    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list   |
-| DELETE | `/todolists/:todolistId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list          |
-| GET    | `/todolists/:todolistId/todos`         | JWT  | –                        | status, message, data: NULL        | Get a single list with todos |
-| POST   | `/todolists/:todolistId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list     |
-| PUT    | `/todolists/:todolistId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo       |
-| DELETE | `/todolists/:todolistId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo       |
+| Method | Endpoint                               | Auth | Payload                  | Response Example                   | Description                     |
+| ------ | -------------------------------------- | ---- | ------------------------ | ---------------------------------- | ------------------------------- |
+| POST   | `/auth/register`                       | -    | `{ username, password }` | OK                                 | Register a new user             |
+| POST   | `/auth/login`                          | -    | `{ username, password }` | JWT                                | Login and receive JWT           |
+| GET    | `/todolists`                           | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists           |
+| POST   | `/todolists`                           | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list         |
+| GET    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: todolist    | Fetch one to-do lists           |
+| PUT    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list      |
+| DELETE | `/todolists/:todolistId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list             |
+| GET    | `/todolists/:todolistId/todos`         | JWT  | –                        | status, message, data: NULL        | Fet all todo in a todolists     |
+| POST   | `/todolists/:todolistId/todos`         | JWT  | `{ message }`            | status, message, data: NULL        | Add a new todo to a list        |
+| GET    | `/todolists/:todolistId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Get a single todo in a todolist |
+| PUT    | `/todolists/:todolistId/todos/:todoId` | JWT  | `{ message, status }`    | status, message, data: todo.status | Update a specific todo          |
+| DELETE | `/todolists/:todolistId/todos/:todoId` | JWT  | –                        | status, message, data: NULL        | Delete a specific todo          |
 
 ## Detailed description of the endpoint and its functions
 endpoint description contains a header, payload, and reponse table for that endpoint.
@@ -143,6 +145,33 @@ add a todo to todolist to todolistId.
 | 201       | TL-201 | success, todolist created                        |
 | 422       | TL-422 | request body invalid                             |
 | 500       | TL-500 | internal server error, new unknown error occured |
+
+### GET   : `/todolists`
+get a single todolists for the user. **Note: User credential is taken from jwt**.
+
+#### Header
+| key           | value description       |
+| ------------- | ----------------------- |
+| Authorization | jwt token from `/login` |
+
+#### Params
+| key    | value desciption       |
+| ------ | ---------------------- |
+| limit  | amount of todolists    |
+| offset | todolists index offset |
+
+#### Response payload
+| key     | value description                                 |
+| ------- | ------------------------------------------------- |
+| status  | self explainatory                                 |
+| message | self explainatory                                 |
+| data    | JSON with keys: todolists [title, status] (array) |
+
+| HTTP Code | Code   | Description           |
+| --------- | ------ | --------------------- |
+| 200       | TL-200 | success               |
+| 500       | LO-500 | unknown error occured |
+
 
 ### PUT   : `/todolists/:todolistId`
 update the todolist property in this case title.
@@ -248,6 +277,34 @@ add todo to todolist
 | --------- | ------ | ------------------------------------------------ |
 | 201       | TO-201 | success, todo added                              |
 | 422       | TO-422 | request body invalid                             |
+| 400       | TO-400 | todolist doesn't exist                           |
+| 500       | TO-500 | internal server error, new unknown error occured |
+
+### GET   : `/todolists/:todolistId/todos/:todoId`
+get a single todo from todolistId.
+
+#### Header
+| key           | value description       |
+| ------------- | ----------------------- |
+| Authorization | jwt token from `/login` |
+
+#### Params
+| key    | value desciption       |
+| ------ | ---------------------- |
+| limit  | amount of todolists    |
+| offset | todolists index offset |
+
+#### Response payload
+| key     | value description                             |
+| ------- | --------------------------------------------- |
+| status  | self explainatory                             |
+| message | self explainatory                             |
+| data    | JSON with keys: todo[status, message] (array) |
+
+#### Status
+| HTTP Code | Code   | Description                                      |
+| --------- | ------ | ------------------------------------------------ |
+| 200       | TO-200 | success                                          |
 | 400       | TO-400 | todolist doesn't exist                           |
 | 500       | TO-500 | internal server error, new unknown error occured |
 
