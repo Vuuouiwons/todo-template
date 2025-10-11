@@ -38,7 +38,7 @@ app -> global middlewares-> routes -> local middlewares -> controllers -> servic
 | POST   | `/auth/login`                          | -    | `{ username, password }` | JWT                                | Login and receive JWT           |
 | GET    | `/todolists`                           | JWT  | –                        | status, message, data: todolist    | Fetch all to-do lists           |
 | POST   | `/todolists`                           | JWT  | `{ title }`              | status, message, data: NULL        | Create a new to-do list         |
-| GET    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: todolist    | Fetch one to-do lists           |
+| GET    | `/todolists/:todolistId`               | JWT  | -                        | status, message, data: todolist    | Fetch one to-do lists           |
 | PUT    | `/todolists/:todolistId`               | JWT  | `{ title, status }`      | status, message, data: NULL        | Update the title of a list      |
 | DELETE | `/todolists/:todolistId`               | JWT  | –                        | status, message, data: todo        | Delete a to-do list             |
 | GET    | `/todolists/:todolistId/todos`         | JWT  | –                        | status, message, data: NULL        | Fet all todo in a todolists     |
