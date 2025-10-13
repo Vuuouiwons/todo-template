@@ -46,10 +46,3 @@ app -> global middlewares-> routes -> local middlewares -> controllers -> servic
 | PUT    | `/todolists/:todolistId/todos/:todoId` | TO            | JWT  | `{ message, status }`    | status, message, data: todo       | Update a specific todo                |
 | DELETE | `/todolists/:todolistId/todos/:todoId` | TO            | JWT  | –                        | status, message, data: NULL       | Delete a specific todo                |
 
-
-## Status format
-the status format is drived from http status with added information.
-```
-controller-http_status_code
-xx-xxx
-```
